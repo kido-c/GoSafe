@@ -5,11 +5,14 @@ import Filternav from "./components/filternav";
 import { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
+import dummydata from "./db/dummydata.json"
 
 function App() {
   const [selectedRegion, setSelectedRegion] = useState("");
-  const [dummy, setDummy] = useState([]);
-  const [filterDummy, setFilterDummy] = useState([]);
+  const [dummy, setDummy] = useState([...dummydata]);
+  const [filterDummy, setFilterDummy] = useState([...dummydata]);
+
+  console.log(dummydata);
 
   const theme = {
     colors: {
@@ -17,13 +20,13 @@ function App() {
     },
   };
 
-  useEffect(() => {
-    axios.get("http://localhost:8080/").then((res) => {
-      console.log(res.data);
-      setDummy([...res.data]);
-      setFilterDummy([...res.data]);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:8080/").then((res) => {
+  //     console.log(res.data);
+  //     setDummy([...dummydata]);
+  //     setFilterDummy([...dummydata]);
+  //   });
+  // }, []);
 
   const changeRegion = (e) => {
     let textRegion = "";
