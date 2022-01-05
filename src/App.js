@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import Ccard from "./components/ccard";
 import Filternav from "./components/filternav";
+import Modal from "./components/modal";
 // import Darkbutton from "./component/darkbutton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
 import dummydata from "./db/dummydata.json"
@@ -11,8 +12,9 @@ function App() {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [dummy, setDummy] = useState([...dummydata]);
   const [filterDummy, setFilterDummy] = useState([...dummydata]);
+  const [modalOpen, setModalOpen] = useState(false)
+  const modalEl = useRef();
 
-  console.log(dummydata);
 
   const theme = {
     colors: {
@@ -20,13 +22,24 @@ function App() {
     },
   };
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:8080/").then((res) => {
-  //     console.log(res.data);
-  //     setDummy([...dummydata]);
-  //     setFilterDummy([...dummydata]);
-  //   });
-  // }, []);
+  const handleClickOutside = ({ target }) => {
+    if (modalOpen && !modalEl.current.contains(target)) setModalOpen(false);
+  };
+
+  const openModal = () => {
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+      setModalOpen(false);
+    };
+
+  useEffect(() => {
+  window.addEventListener("click", handleClickOutside);
+  return () => {
+    window.removeEventListener("click", handleClickOutside);
+  };
+  }, []);
 
   const changeRegion = (e) => {
     let textRegion = "";
@@ -45,6 +58,12 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Appcontainer>
+          {modalOpen && <Modal
+            open={modalOpen}
+            close={closeModal}
+            header="Modal headging"
+            ref={modalEl}
+          />}
           <Apphead>
             GoSafe
             {/* <Darkbutton /> */}
@@ -62,6 +81,7 @@ function App() {
               .map((item) => {
                 return (
                   <Ccard
+                    open={openModal}
                     country_eng_nm={item.country_eng_nm}
                     country_nm={item.country_nm}
                     download_url={item.download_url}

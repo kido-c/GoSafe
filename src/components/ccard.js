@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Ccard({
+  open,
   country_eng_nm,
   country_nm,
   entry,
@@ -25,7 +26,7 @@ function Ccard({
   // }, [country_isocode]);
 
   return (
-    <Cardcontainer>
+    <Cardcontainer onClick={open}>
       <GlobalFonts />
       <Leftcard>
         <Ltopcard state={entry}>
