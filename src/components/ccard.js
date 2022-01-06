@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Ccard({
+  getCountry,
   open,
   country_eng_nm,
   country_nm,
@@ -15,18 +16,14 @@ function Ccard({
   download_url,
   quarantine_date,
 }) {
-  const [countryImg, setNowCountryImg] = useState({});
 
-  // 그냥 서버에서 다 받아오자
-
-  // useEffect(() => {
-  //   axios
-  //     .post("http://localhost:8080/", { country_isocode })
-  //     .then((res) => setNowCountryImg(res.data));
-  // }, [country_isocode]);
+  const onClick = () => {
+    open()
+    getCountry(country_eng_nm);
+  }
 
   return (
-    <Cardcontainer onClick={open}>
+    <Cardcontainer onClick={onClick}>
       <GlobalFonts />
       <Leftcard>
         <Ltopcard state={entry}>
@@ -111,6 +108,7 @@ const Cardcontainer = styled.div`
   margin-bottom: 30px;
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 `;
 
 const Leftcard = styled.div`
@@ -163,6 +161,7 @@ const Lbottomcard = styled.div`
 const Rightcard = styled.div`
   height: 220px;
   width: 190px;
+  transform: rotate(20deg);
 `;
 
 const Rtopcard = styled.div`

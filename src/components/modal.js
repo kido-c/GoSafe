@@ -4,7 +4,7 @@ import styled, {keyframes} from 'styled-components';
 
 const Modal = (props) => {
 
-    const { open, close, header } = props;
+    const { open, close, header, item } = props;
 
     return (
       <ModalContainer open={open}>
@@ -17,7 +17,14 @@ const Modal = (props) => {
                 &times;{" "}
               </HeaderButton>
             </ModalHeader>
-            <ModalMain>여기에 국가에 대한 상세 정보가 들어간다</ModalMain>
+            <ModalMain>
+              <p>{item.id}</p>
+              <p>{item.country_nm}</p>
+              <p>{item.country_eng_nm}</p>
+              <p>{item.datail_ink}</p>
+              <p>{item.entry}</p>
+              <p>{item.acceptable_vaccines}</p>
+            </ModalMain>
             <ModalFooter>
               <FooterButton className="close" onClick={close}>
                 {" "}

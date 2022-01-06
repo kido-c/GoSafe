@@ -13,7 +13,12 @@ function App() {
   const [dummy, setDummy] = useState([...dummydata]);
   const [filterDummy, setFilterDummy] = useState([...dummydata]);
   const [modalOpen, setModalOpen] = useState(false)
+  const [selectedCountry, setSelectedCountry] = useState()
   const modalEl = useRef();
+
+  const getCountry = (country) => {
+    setSelectedCountry(country);
+  }
 
 
   const theme = {
@@ -22,24 +27,16 @@ function App() {
     },
   };
 
-  const handleClickOutside = ({ target }) => {
-    if (modalOpen && !modalEl.current.contains(target)) setModalOpen(false);
-  };
-
   const openModal = () => {
     setModalOpen(true)
+    
   }
 
   const closeModal = () => {
-      setModalOpen(false);
-    };
-
-  useEffect(() => {
-  window.addEventListener("click", handleClickOutside);
-  return () => {
-    window.removeEventListener("click", handleClickOutside);
+    setModalOpen(false);
   };
-  }, []);
+  
+
 
   const changeRegion = (e) => {
     let textRegion = "";
@@ -58,19 +55,31 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Appcontainer>
-          {modalOpen && <Modal
-            open={modalOpen}
-            close={closeModal}
-            header="Modal headging"
-            ref={modalEl}
-          />}
+          {modalOpen && (
+            filterDummy.filter((val) => {
+              if (val.country_eng_nm === selectedCountry) {
+                return val
+              } 
+            }).map((item) => {
+              return (
+                <Modal
+                  item={item}
+                  data={filterDummy}
+                  open={modalOpen}
+                  close={closeModal}
+                  header="Modal headging"
+                  ref={modalEl}
+                />
+              );
+            })
+          )}
           <Apphead>
             GoSafe
             {/* <Darkbutton /> */}
           </Apphead>
           <Filternav changeRegion={changeRegion} />
           <Cardcontainer>
-            {filterDummy
+            {dummy
               .filter((val) => {
                 if (selectedRegion === "") {
                   return val;
@@ -81,6 +90,8 @@ function App() {
               .map((item) => {
                 return (
                   <Ccard
+                    selectedCountr={selectedCountry}
+                    getCountry={getCountry}
                     open={openModal}
                     country_eng_nm={item.country_eng_nm}
                     country_nm={item.country_nm}
