@@ -1,13 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import GlobalFonts from "../font/font";
 import map from "../images/map.png";
 import barcode from "../images/barcode2.png";
 import plane from "../images/plane.png";
 import { useState, useEffect } from "react";
-import axios from "axios";
 
 function Ccard({
+  modalOpen,
   getCountry,
   open,
   country_eng_nm,
@@ -17,9 +17,16 @@ function Ccard({
   quarantine_date,
 }) {
 
+  const [ticketState, setTicketState] = useState(false)
+
+  useEffect(() => {
+    if (!modalOpen) setTicketState(false);
+  }, [modalOpen]); // 모달오픈여부에 따라 뜯어지는 효과는 되지만, 랜더링 조절이 필요로 하다. 
+
   const onClick = () => {
     open()
     getCountry(country_eng_nm);
+    setTicketState(true)
   }
 
   return (
@@ -48,7 +55,7 @@ function Ccard({
         </LMiddlecard>
         <Lbottomcard state={entry} />
       </Leftcard>
-      <Rightcard>
+      <Rightcard state={ticketState}>
         <Rtopcard state={entry}> BOARDING PASS </Rtopcard>
         <RMiddlecard countryImg={download_url} />
         <Rbottomcard state={entry} />
@@ -56,6 +63,7 @@ function Ccard({
     </Cardcontainer>
   );
 }
+
 
 const Ptage = styled.p`
   padding: 0px;
@@ -108,6 +116,9 @@ const Cardcontainer = styled.div`
   margin-bottom: 30px;
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  :hover {
+    cursor: pointer;
+  }
 
 `;
 
@@ -161,7 +172,8 @@ const Lbottomcard = styled.div`
 const Rightcard = styled.div`
   height: 220px;
   width: 190px;
-  transform: rotate(20deg);
+  transform: ${(props) => (props.state ? "rotate(20deg)" : "null")};
+
 `;
 
 const Rtopcard = styled.div`
@@ -196,3 +208,4 @@ const Rbottomcard = styled.div`
 `;
 
 export default Ccard;
+

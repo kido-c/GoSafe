@@ -1,5 +1,6 @@
 import React from 'react'
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import plane from "../images/plane.png";
 
 
 const Modal = (props) => {
@@ -11,19 +12,27 @@ const Modal = (props) => {
         {open ? (
           <ModalSection>
             <ModalHeader>
-              {header}
+              {item.country_eng_nm}_{item.country_nm}
+              <Plane />
               <HeaderButton className="close" onClick={close}>
                 {" "}
                 &times;{" "}
               </HeaderButton>
             </ModalHeader>
             <ModalMain>
-              <p>{item.id}</p>
-              <p>{item.country_nm}</p>
-              <p>{item.country_eng_nm}</p>
-              <p>{item.datail_ink}</p>
-              <p>{item.entry}</p>
-              <p>{item.acceptable_vaccines}</p>
+              <Rightcard>
+                <Rtopcard state={item.entry}> BOARDING PASS </Rtopcard>
+                <RMiddlecard countryImg={item.download_url} />
+                <Rbottomcard state={item.entry} />
+              </Rightcard>
+              <div>
+                {item.id}
+                <p>{item.country_nm}</p>
+                <p>{item.country_eng_nm}</p>
+                <p>{item.datail_ink}</p>
+                <p>{item.entry}</p>
+                <p>{item.acceptable_vaccines}</p>
+              </div>
             </ModalMain>
             <ModalFooter>
               <FooterButton className="close" onClick={close}>
@@ -37,6 +46,31 @@ const Modal = (props) => {
     );
 }
 
+const planFadein = keyframes`
+  0%{
+    margin-left:100px;
+    opacity:1;
+  }
+
+100%{
+    margin-left:680px;
+    opacity:0;
+  }
+`;
+
+
+const Plane = styled.div`
+  width: 35px;
+  height: 35px;
+  margin-top: 3px;
+  background-image: url(${plane});
+  background-size: 100%;
+  margin-left: 20px;
+  animation-delay: 0.3s;
+  animation: ${planFadein} 3s;
+  animation-iteration-count: infinite;
+  overflow: hidden;
+`;
 
 const boxFadein = keyframes`
       from {
@@ -46,15 +80,6 @@ const boxFadein = keyframes`
   to {
     opacity: 1;
     margin-top: 0;
-  }
-`;
-
-const boxFadeout = keyframes`
-      from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 `;
 
@@ -84,9 +109,11 @@ const ModalSection = styled.div`
 
 const ModalHeader = styled.div`
   position: relative;
-  padding: 16px 64px 16px 16px;
+  padding: 10px 64px 10px 16px;
   background-color: #f1f1f1;
   font-weight: 700;
+  display: flex;
+  line-height: 42px;
 `;
 
 const HeaderButton = styled.button`
@@ -105,6 +132,8 @@ const ModalMain = styled.div`
   padding: 16px;
   border-bottom: 1px solid #dee2e6;
   border-top: 1px solid #dee2e6;
+  display: flex;
+
 `;
 
 const ModalFooter = styled.div`
@@ -119,6 +148,43 @@ const FooterButton = styled.button`
   border-radius: 5px;
   font-size: 13px;
 `;
+
+const Rightcard = styled.div`
+  height: 220px;
+  width: 190px;
+  transform: ${(props)=>(props.state ? "rotate(20deg)" : "null" )};
+`;
+
+const Rtopcard = styled.div`
+  height: 40px;
+  width: 190px;
+  font-family: "Noto Sans KR";
+  font-size: 12px;
+  text-align: center;
+  color: white;
+  line-height: 40px;
+  border-radius: 0 15px 0 0;
+  background-color: ${(props) => (props.state ? "#45a8a2" : "#DC6761")};
+  opacity: 0.7;
+`;
+
+const RMiddlecard = styled.div`
+  height: 160px;
+  width: 190px;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: ${(props) => `url(${props.countryImg})`};
+`;
+
+const Rbottomcard = styled.div`
+  height: 20px;
+  width: 190px;
+  border-radius: 0 0 15px 0;
+  padding: 0;
+  background-color: ${(props) => (props.state ? "#45a8a2" : "#DC6761")};
+  opacity: 0.7;
+`
 
 
 

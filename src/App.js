@@ -35,6 +35,7 @@ function App() {
   const closeModal = () => {
     setModalOpen(false);
   };
+
   
 
 
@@ -90,6 +91,7 @@ function App() {
               .map((item) => {
                 return (
                   <Ccard
+                    modalOpen={modalOpen}
                     selectedCountr={selectedCountry}
                     getCountry={getCountry}
                     open={openModal}
