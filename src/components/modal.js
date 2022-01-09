@@ -26,14 +26,23 @@ const Modal = (props) => {
                 <Rbottomcard state={item.entry} />
               </Rightcard>
               <div>
-                {item.id}
                 <p>{item.country_nm}</p>
                 <p>{item.country_eng_nm}</p>
-                <p>{item.datail_ink}</p>
+                <a href={item.datail_ink} target="_blank">
+                  상세링크{" "}
+                </a>
                 <p>{item.entry}</p>
                 <p>{item.acceptable_vaccines}</p>
               </div>
             </ModalMain>
+            <CommentMain>
+              <div>
+                <p>2021.1.5에 입국했는데 괜찮았어요 </p>
+                <p>2021.1.5에 입국했는데 괜찮았어요 </p>
+                <p>2021.1.5에 입국했는데 괜찮았어요 </p>
+                <p>2021.1.5에 입국했는데 괜찮았어요 </p>
+              </div>
+            </CommentMain>
             <ModalFooter>
               <FooterButton className="close" onClick={close}>
                 {" "}
@@ -45,6 +54,10 @@ const Modal = (props) => {
       </ModalContainer>
     );
 }
+
+const DetailLink = styled.a`
+
+`
 
 const planFadein = keyframes`
   0%{
@@ -133,7 +146,13 @@ const ModalMain = styled.div`
   border-bottom: 1px solid #dee2e6;
   border-top: 1px solid #dee2e6;
   display: flex;
+`;
 
+const CommentMain = styled.div`
+  padding: 16px;
+  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid #dee2e6;
+  display: flex;
 `;
 
 const ModalFooter = styled.div`
@@ -152,7 +171,8 @@ const FooterButton = styled.button`
 const Rightcard = styled.div`
   height: 220px;
   width: 190px;
-  transform: ${(props)=>(props.state ? "rotate(20deg)" : "null" )};
+  transform: ${(props) => (props.state ? "rotate(20deg)" : "null")};
+  margin-right: 30px;
 `;
 
 const Rtopcard = styled.div`

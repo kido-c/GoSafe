@@ -8,7 +8,7 @@ function Filternav({ changeRegion }) {
   return (
     <FilterNavContainer>
       <FiltterButtonContainer>
-        <Button variant="outlined" size="small" onClick={changeRegion}>
+        <Button variant="outlined" size="small" onClick={changeRegion }>
           전체
         </Button>
         <Button variant="outlined" size="small" onClick={changeRegion}>
@@ -26,6 +26,10 @@ function Filternav({ changeRegion }) {
         <Button variant="outlined" size="small" onClick={changeRegion}>
           오세아니아
         </Button>
+        <>
+          <input /> 
+          <button> </button>
+        </>
       </FiltterButtonContainer>
     </FilterNavContainer>
   );
@@ -35,11 +39,11 @@ const FilterNavContainer = styled.div`
   margin-top: 10px;
   border: 1px solid black;
   width: 95%;
-  height: 100px;
+  height: 80px;
   border-radius: 15px;
   display: flex;
   align-items: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
 `;
 
 const FiltterButtonContainer = styled.div`

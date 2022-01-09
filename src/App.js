@@ -80,6 +80,7 @@ function App() {
           </Apphead>
           <Filternav changeRegion={changeRegion} />
           <Cardcontainer>
+            <Cardheader> 여행국가</Cardheader>
             {dummy
               .filter((val) => {
                 if (selectedRegion === "") {
@@ -104,6 +105,7 @@ function App() {
                 );
               })}
           </Cardcontainer>
+          <AppFooter> 해당 내용은 한국인 출국자를 대상으로한 정보입니다.</AppFooter>
         </Appcontainer>
       </ThemeProvider>
     </>
@@ -115,10 +117,15 @@ const Appcontainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  background-color: rgba(235, 235, 235, 1);
 `;
 
 const Apphead = styled.div`
+  margin-top: 30px;
+  margin-bottom: 20px;
   text-align: center;
+  font-size: 30px;
+  font-weight: bold;
   line-height: 50px;
   border: 2px solid black;
   width: 95%;
@@ -126,14 +133,39 @@ const Apphead = styled.div`
   border-radius: 15px;
   display: flex;
   justify-content: space-around;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color:white;
+`;
+
+const Cardheader = styled.div`
+  width: 95%;
+  height: 100px;
+  padding-left: 30px;
+  line-height: 100px;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: rgba(252, 237, 207, 1);
 `;
 
 const Cardcontainer = styled.div`
+  width: 95%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
+  border-radius: 15px;
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
+
+const AppFooter = styled.div`
+  width: 95%;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 10px;
+  background-color: rgba(252, 237, 207, 1);
+`;
+
 
 export default App;
