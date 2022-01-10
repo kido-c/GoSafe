@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import { useState } from "react";
-import { useEffect } from "react";
+
 
 function Filternav({ changeRegion }) {
   return (
@@ -26,10 +25,6 @@ function Filternav({ changeRegion }) {
         <Button variant="outlined" size="small" onClick={changeRegion}>
           오세아니아
         </Button>
-        <>
-          <input /> 
-          <button> </button>
-        </>
       </FiltterButtonContainer>
     </FilterNavContainer>
   );
@@ -38,7 +33,7 @@ function Filternav({ changeRegion }) {
 const FilterNavContainer = styled.div`
   margin-top: 10px;
   border: 1px solid black;
-  width: 95%;
+  width: 1300px;
   height: 80px;
   border-radius: 15px;
   display: flex;
@@ -49,7 +44,7 @@ const FilterNavContainer = styled.div`
 const FiltterButtonContainer = styled.div`
   margin: 10px;
   height: 50px;
-  width: 95%;
+  width: 1300px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

@@ -42,15 +42,17 @@ function Ccard({
           <Barcode />
           <Contentcontainer>
             <Cardcontent>
-              <Ptage>여행 국가: </Ptage>
-              <Ptage>{country_eng_nm}</Ptage>
-              <Ptage>{country_nm}</Ptage>
+              <Pname>여행 국가: </Pname>
+              <Pcontent>{country_eng_nm}</Pcontent>
+              <Pcontent>{country_nm}</Pcontent>
             </Cardcontent>
             <Cardcontent>
-              <p>필요 서류: </p>
-              <p>PCR (72h)</p>
+              <Pname>필요 서류: </Pname>
+              <Pcontent>PCR (72h)</Pcontent>
             </Cardcontent>
-            <Cardcontent>자가격리 기간 : {quarantine_date}일</Cardcontent>
+            <Cardcontent>
+              <BottomName>자가격리 기간 : {quarantine_date} days</BottomName>
+            </Cardcontent>
           </Contentcontainer>
         </LMiddlecard>
         <Lbottomcard state={entry} />
@@ -65,14 +67,33 @@ function Ccard({
 }
 
 
-const Ptage = styled.p`
+const Pname = styled.p`
   padding: 0px;
   margin: 0px;
+  font-size: 12px;
+`;
+
+const BottomName = styled.p`
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  font-size: 15px;
+  font-weight: bold;
+  right: 50px;
+`;
+
+const Pcontent = styled.p`
+  width: 100px;
+  padding: 0px;
+  margin: 0px;
+  font-size: 15px;
+  font-weight: bold;
 `;
 
 const Cardcontent = styled.div`
   delay: 0.1;
-  padding: 5px 15px 5px 15px;
+  padding: 20px 15px 5px 15px;
+  margin-left: 15px;
   font-family: "Noto Sans KR";
   justify-self: center;
 `;
@@ -154,10 +175,18 @@ const LMiddlecard = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-image: url(${map});
-  &:after {
+  position: relative;
+  &:before {
     content: "";
-  }
+    background: url(${map});
+    background-size: cover;
+    position: absolute;
+    opacity: 0.3;
+         top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+  };
 `;
 
 const Lbottomcard = styled.div`

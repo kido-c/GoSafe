@@ -1,23 +1,24 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components';
 import plane from "../images/plane.png";
+import passport from "../images/passport.png"
+import cancel from "../images/cancel.png"
 
 
 const Modal = (props) => {
 
-    const { open, close, header, item } = props;
+    const { open, close, item } = props;
 
     return (
       <ModalContainer open={open}>
         {open ? (
           <ModalSection>
             <ModalHeader>
-              {item.country_eng_nm}_{item.country_nm}
+              <Passportimg src={passport} />
+              상세 입국 정보
               <Plane />
-              <HeaderButton className="close" onClick={close}>
-                {" "}
-                &times;{" "}
-              </HeaderButton>
+              <HeaderButton className="close" onClick={close} img={cancel}>
+               </HeaderButton>
             </ModalHeader>
             <ModalMain>
               <Rightcard>
@@ -26,8 +27,9 @@ const Modal = (props) => {
                 <Rbottomcard state={item.entry} />
               </Rightcard>
               <div>
-                <p>{item.country_nm}</p>
-                <p>{item.country_eng_nm}</p>
+                <p>
+                  {item.country_nm} _ {item.country_eng_nm}
+                </p>
                 <a href={item.datail_ink} target="_blank">
                   상세링크{" "}
                 </a>
@@ -43,21 +45,20 @@ const Modal = (props) => {
                 <p>2021.1.5에 입국했는데 괜찮았어요 </p>
               </div>
             </CommentMain>
-            <ModalFooter>
-              <FooterButton className="close" onClick={close}>
-                {" "}
-                close{" "}
-              </FooterButton>
-            </ModalFooter>
+            <ModalFooter></ModalFooter>
           </ModalSection>
         ) : null}
       </ModalContainer>
     );
 }
 
-const DetailLink = styled.a`
-
-`
+const Passportimg = styled.img`
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  position: relative;
+  top: 5px;
+`;
 
 const planFadein = keyframes`
   0%{
@@ -124,21 +125,29 @@ const ModalHeader = styled.div`
   position: relative;
   padding: 10px 64px 10px 16px;
   background-color: #f1f1f1;
+  font-size: 18px;
   font-weight: 700;
   display: flex;
   line-height: 42px;
 `;
 
-const HeaderButton = styled.button`
+const HeaderButton = styled.div`
   position: absolute;
   top: 15px;
   right: 15px;
   width: 30px;
+  height: 30px;
   font-size: 21px;
   font-weight: 700;
   text-align: center;
   color: #999;
-  background-color: transparent;
+  background-image: url(${cancel});
+  background-size: 100%;
+  opacity: 0.7;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
 `;
 
 const ModalMain = styled.div`
