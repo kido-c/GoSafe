@@ -31,9 +31,9 @@ function Filternav({ changeRegion }) {
 }
 
 const FilterNavContainer = styled.div`
-  margin-top: 10px;
+  margin: 30px 20px 20px 35px;
   border: 1px solid black;
-  width: 1300px;
+  width: 95%;
   height: 80px;
   border-radius: 15px;
   display: flex;
@@ -42,9 +42,8 @@ const FilterNavContainer = styled.div`
 `;
 
 const FiltterButtonContainer = styled.div`
-  margin: 10px;
   height: 50px;
-  width: 1300px;
+  width: 95%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

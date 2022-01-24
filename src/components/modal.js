@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components';
+import { Link } from "react-router-dom";
 import plane from "../images/plane.png";
 import passport from "../images/passport.png"
 import cancel from "../images/cancel.png"
@@ -17,8 +18,11 @@ const Modal = (props) => {
               <Passportimg src={passport} />
               상세 입국 정보
               <Plane />
-              <HeaderButton className="close" onClick={close} img={cancel}>
-               </HeaderButton>
+              <HeaderButton
+                className="close"
+                onClick={close}
+                img={cancel}
+              ></HeaderButton>
             </ModalHeader>
             <ModalMain>
               <Rightcard>
@@ -27,9 +31,13 @@ const Modal = (props) => {
                 <Rbottomcard state={item.entry} />
               </Rightcard>
               <div>
-                <p>
+                <CountrynmBox
+                  to={{
+                    pathname: `/statistics/?country=${item.country_eng_nm}`
+                  }}
+                >
                   {item.country_nm} _ {item.country_eng_nm}
-                </p>
+                </CountrynmBox>
                 <a href={item.datail_ink} target="_blank">
                   상세링크{" "}
                 </a>
@@ -51,6 +59,8 @@ const Modal = (props) => {
       </ModalContainer>
     );
 }
+
+const CountrynmBox = styled(Link)``;
 
 const Passportimg = styled.img`
   width: 30px;
@@ -85,6 +95,8 @@ const Plane = styled.div`
   animation-iteration-count: infinite;
   overflow: hidden;
 `;
+
+
 
 const boxFadein = keyframes`
       from {
